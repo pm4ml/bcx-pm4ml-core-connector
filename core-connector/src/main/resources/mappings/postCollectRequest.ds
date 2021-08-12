@@ -1,0 +1,4 @@
+{
+  "destinationAccountId": cml.header('idValue'),
+  "destinationBankId": "604980"
+}

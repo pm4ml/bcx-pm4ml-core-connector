@@ -1,0 +1,7 @@
+{
+  type: "CONSUMER",
+  idType: cml.header('idType'),
+  idValue: cml.header('idValue'),
+  firstName: payload.firstName,
+  lastName: payload.lastName
+ }
