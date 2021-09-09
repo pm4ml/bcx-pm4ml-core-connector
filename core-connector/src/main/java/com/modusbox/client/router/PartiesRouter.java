@@ -62,8 +62,8 @@ public class PartiesRouter extends RouteBuilder {
 						"'Calling BCX backend API, collect, LOOKUP action', " +
 						"'Tracking the request', " +
 						"'Track the response', " +
-						"'Request sent to, POST http://172.25.29.22/tips_test/api/lookUpService/ Payload: ${body}')")
-				.to("http://172.25.29.22/tips_test/api/lookUpService/")
+						"'Request sent to, POST http://172.25.29.22/tips/api/lookUpService/ Payload: ${body}')")
+				.to("http://172.25.29.22/tips/api/lookUpService/")
 				.to("bean:customJsonMessage?method=logJsonMessage('info', ${header.X-CorrelationId}, " +
 						"'Response from BCX backend API, lookUpService,, getParties: ${body}', " +
 						"'Tracking the response', 'Verify the response', null)")
