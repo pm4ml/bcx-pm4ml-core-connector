@@ -66,8 +66,8 @@ public class QuotesRouter extends RouteBuilder {
 						"'Calling BCX backend API, collect, CONFIRM_QUOTE action', " +
 						"'Tracking the request', " +
 						"'Track the response', " +
-						"'Request sent to, POST https://bcx.ga/api/payments/collect Payload: ${body}')")
-				.toD("https://bcx.ga/api/payments/collect")
+						"'Request sent to, POST http://172.25.29.22/tips_test Payload: ${body}')")
+				.toD("http://172.25.29.22/tips_test")
 				.unmarshal().json(JsonLibrary.Gson)
 				.to("bean:customJsonMessage?method=logJsonMessage('info', ${header.X-CorrelationId}, " +
 						"'Response from BCX backend API, collect, CONFIRM_QUOTE action, postQuotes: ${body}', " +

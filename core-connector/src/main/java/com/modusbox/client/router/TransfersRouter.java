@@ -104,8 +104,8 @@ public class TransfersRouter extends RouteBuilder {
                         "'Calling BCX backend API, payment', " +
                         "'Tracking the request', " +
                         "'Track the response', " +
-                        "'Request sent to, POST https://merchants.bcx.co.tz/tips/api/payment/ Payload: ${body}')")
-                .toD("https://merchants.bcx.co.tz/tips/api/payment/")
+                        "'Request sent to, POST http://172.25.29.22/tips_test/api/payment/ Payload: ${body}')")
+                .toD("http://172.25.29.22/tips_test/api/payment/")
                 .unmarshal().json(JsonLibrary.Gson)
                 .to("bean:customJsonMessage?method=logJsonMessage(" +
                         "'info', " +
