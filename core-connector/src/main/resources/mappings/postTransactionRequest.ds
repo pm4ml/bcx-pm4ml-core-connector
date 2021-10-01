@@ -1,7 +1,6 @@
 {
-    "service_id": 105,
     "institution": payload.quoteRequest.body.payee.partyIdInfo.partyIdentifier[0:6],
+    "account": payload.quoteRequest.body.payee.partyIdInfo.partyIdentifier[6:],
     "amount": payload.prepare.body.amount.amount,
-    "account_to_resolve": payload.quoteRequest.body.payee.partyIdInfo.partyIdentifier[6:],
-    "user_mobile_number": "255758207020"
+    "name": payload.quoteRequest.body.payee.personalInfo.complexName.firstName + payload.quoteRequest.body.payee.personalInfo.complexName.lastName
 }
