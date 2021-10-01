@@ -1,43 +1,7 @@
 {
-    "processingCode":"400000",
-    "retrievalReferenceNumber":"001627319900",
-    "systemTraceAuditNumber":"",
-    "requestAmount":"000000250000",
-    "transmissionDateTime":"0726105013",
-    "acquirerInstitutionID":"581677",
-    "receivingIID":"581677",
-    "toAccount":"001304000078",
-    "amountTransactionFee":"D00000000",
-    "currencyCode":"834",
-    "payerRef": "003-7k084ehse56", "payer": {
-        "identifierType": "MSISDN",
-        "identifier": "255556789922",
-        "fspId": "003",
-        "fullName": "Ally Mtoni",
-        "accountCategory": "PERSON",
-        "accountType": "Wallet",
-        "identity": {
-            "type": "NIN",
-    "value": "19831007175010005135" }
-    }, "payee": {
-        "identifierType": "MSISDN",
-    "identifier": "255621804189", "fspId": "004",
-    "fullName": " Alex Junior", "accountCategory": "PERSON", "accountType": "Wallet", "identity": {
-            "type": "NIN",
-    "value":"19501007111010000126" }
-      },
-      "amount": {
-        "amount": 100,
-        "currency": "TZS"
-      },
-      "endUserFee": {
-        "amount": 5,
-        "currency": "TZS"
-      },
-      "transactionType": {
-        "scenario": "TRANSFER",
-        "initiator": "PAYER",
-        "initiatorType": "CONSUMER"
-    },
-    "description": "Test description"
+    "service_id": 105,
+    "institution": payload.quoteRequest.body.payee.partyIdInfo.partyIdentifier[0:6],
+    "amount": payload.prepare.body.amount.amount,
+    "account_to_resolve": payload.quoteRequest.body.payee.partyIdInfo.partyIdentifier[6:],
+    "user_mobile_number": "255758207020"
 }

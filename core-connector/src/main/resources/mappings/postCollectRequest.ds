@@ -1,4 +1,4 @@
 {
-  "destinationAccountId": cml.header('idValue'),
-  "destinationBankId": "604980"
+  "destinationAccountId": cml.header('idValue')[6:],
+  "destinationBankId": cml.header('idValue')[0:6],
 }

@@ -57,6 +57,32 @@ public class TransfersRouter extends RouteBuilder {
                 /*
                  * BEGIN processing
                  */
+                .marshal().json()
+                .transform(datasonnet("resource:classpath:mappings/postTransactionRequestPre.ds"))
+                .setBody(simple("${body.content}"))
+                .marshal().json()
+
+                .removeHeaders("CamelHttp*")
+                .setHeader("Content-Type", constant("application/json"))
+                .setHeader("Accept", constant("application/json"))
+                .setHeader(Exchange.HTTP_METHOD, constant("POST"))
+
+                .to("bean:customJsonMessage?method=logJsonMessage(" +
+                        "'info', " +
+                        "${header.X-CorrelationId}, " +
+                        "'Calling BCX backend API, payment', " +
+                        "'Tracking the request', " +
+                        "'Track the response', " +
+                        "'Request sent to, POST http://172.25.29.80:8008/tips/api/lookUp/receive/payment/details Payload: ${body}')")
+                .toD("http://172.25.29.80:8008/tips/api/lookUp/receive/payment/details")
+                .unmarshal().json(JsonLibrary.Gson)
+                .to("bean:customJsonMessage?method=logJsonMessage(" +
+                        "'info', " +
+                        "${header.X-CorrelationId}, " +
+                        "'Response from BCX backend API, payment, postTransaction: ${body}', " +
+                        "'Tracking the response', " +
+                        "'Verify the response', null)")
+                .setHeader(Exchange.HTTP_RESPONSE_CODE, constant(200))
                 .setBody(constant("{\"homeTransactionId\": \"1234\"}"))
                 /*
                  * END processing

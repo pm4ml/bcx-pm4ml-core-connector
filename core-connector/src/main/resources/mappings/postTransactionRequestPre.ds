@@ -1,0 +1,7 @@
+{
+    "service_id": 105,
+    "institution": payload.to.idValue[0:6],
+    "amount": payload.ilpPacket.data.amount.amount,
+    "account_to_resolve": payload.to.idValue[6:],
+    "user_mobile_number": "255758207020"
+}
