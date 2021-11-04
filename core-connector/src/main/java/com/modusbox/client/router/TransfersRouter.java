@@ -73,8 +73,8 @@ public class TransfersRouter extends RouteBuilder {
                         "'Calling BCX backend API, payment', " +
                         "'Tracking the request', " +
                         "'Track the response', " +
-                        "'Request sent to, POST http://172.25.29.22:8090/tips/api/payment/process/payment Payload: ${body}')")
-                .toD("http://172.25.29.22:8090/tips/api/payment/process/payment")
+                        "'Request sent to, POST http://172.25.29.22:19996/api/payment/process/payment Payload: ${body}')")
+                .toD("http://172.25.29.22:19996/api/payment/process/payment")
                 .unmarshal().json(JsonLibrary.Gson)
                 .to("bean:customJsonMessage?method=logJsonMessage(" +
                         "'info', " +
@@ -130,8 +130,8 @@ public class TransfersRouter extends RouteBuilder {
                         "'Calling BCX backend API, payment', " +
                         "'Tracking the request', " +
                         "'Track the response', " +
-                        "'Request sent to, POST http://172.25.29.22:8090/tips/api/payment/process/payment Payload: ${body}')")
-                .toD("http://172.25.29.22:8090/tips/api/payment/process/payment")
+                        "'Request sent to, POST http://172.25.29.22:19996/api/payment/process/payment Payload: ${body}')")
+                .toD("http://172.25.29.22:19996/api/payment/process/payment")
                 .unmarshal().json(JsonLibrary.Gson)
                 .to("bean:customJsonMessage?method=logJsonMessage(" +
                         "'info', " +
