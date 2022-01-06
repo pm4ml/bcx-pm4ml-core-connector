@@ -82,6 +82,12 @@ public class TransfersRouter extends RouteBuilder {
                         "'Response from BCX backend API, payment, postTransaction: ${body}', " +
                         "'Tracking the response', " +
                         "'Verify the response', null)")
+//                .process(exchange -> System.out.println())
+                .choice()
+                .when(simple("${body['responseCode']} != 00 || ${body['responseCode']} != 09 ${body['responseCode']} != 10"))
+                .to("direct:catchCBSError")
+                .endDoTry()
+
                 .setHeader(Exchange.HTTP_RESPONSE_CODE, constant(200))
                 .setBody(constant("{\"homeTransactionId\": \"1234\"}"))
                 /*
@@ -114,31 +120,31 @@ public class TransfersRouter extends RouteBuilder {
                 /*
                  * BEGIN processing
                  */
-                .marshal().json()
-                .transform(datasonnet("resource:classpath:mappings/postTransactionRequest.ds"))
-                .setBody(simple("${body.content}"))
-                .marshal().json()
-
-                .removeHeaders("CamelHttp*")
-                .setHeader("Content-Type", constant("application/json"))
-                .setHeader("Accept", constant("application/json"))
-                .setHeader(Exchange.HTTP_METHOD, constant("POST"))
-
-                .to("bean:customJsonMessage?method=logJsonMessage(" +
-                        "'info', " +
-                        "${header.X-CorrelationId}, " +
-                        "'Calling BCX backend API, payment', " +
-                        "'Tracking the request', " +
-                        "'Track the response', " +
-                        "'Request sent to, POST http://172.25.29.22:19996/api/payment/process/payment Payload: ${body}')")
-                .toD("http://172.25.29.22:19996/api/payment/process/payment")
-                .unmarshal().json(JsonLibrary.Gson)
-                .to("bean:customJsonMessage?method=logJsonMessage(" +
-                        "'info', " +
-                        "${header.X-CorrelationId}, " +
-                        "'Response from BCX backend API, collect, TRANSFER action, postTransaction: ${body}', " +
-                        "'Tracking the response', " +
-                        "'Verify the response', null)")
+//                .marshal().json()
+//                .transform(datasonnet("resource:classpath:mappings/postTransactionRequest.ds"))
+//                .setBody(simple("${body.content}"))
+//                .marshal().json()
+//
+//                .removeHeaders("CamelHttp*")
+//                .setHeader("Content-Type", constant("application/json"))
+//                .setHeader("Accept", constant("application/json"))
+//                .setHeader(Exchange.HTTP_METHOD, constant("POST"))
+//
+//                .to("bean:customJsonMessage?method=logJsonMessage(" +
+//                        "'info', " +
+//                        "${header.X-CorrelationId}, " +
+//                        "'Calling BCX backend API, payment', " +
+//                        "'Tracking the request', " +
+//                        "'Track the response', " +
+//                        "'Request sent to, POST http://172.25.29.22:19996/api/payment/process/payment Payload: ${body}')")
+//                .toD("http://172.25.29.22:19996/api/payment/process/payment")
+//                .unmarshal().json(JsonLibrary.Gson)
+//                .to("bean:customJsonMessage?method=logJsonMessage(" +
+//                        "'info', " +
+//                        "${header.X-CorrelationId}, " +
+//                        "'Response from BCX backend API, collect, TRANSFER action, postTransaction: ${body}', " +
+//                        "'Tracking the response', " +
+//                        "'Verify the response', null)")
                 .setHeader(Exchange.HTTP_RESPONSE_CODE, constant(200))
                 .setBody(constant(""))
                 /*
