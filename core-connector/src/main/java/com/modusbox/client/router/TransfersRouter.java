@@ -90,7 +90,7 @@ public class TransfersRouter extends RouteBuilder {
                         "'Verify the response', null)")
 //                .process(exchange -> System.out.println())
                 .choice()
-                  .when(simple("${body['responseCode']} != '00' || ${body['responseCode']} != '09' ${body['responseCode']} != '10'"))
+                  .when(simple("${body['responseCode']} != '00'"))
                     .to("direct:catchCBSError")
                 .endDoTry()
 
