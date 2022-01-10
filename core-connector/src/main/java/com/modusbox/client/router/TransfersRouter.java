@@ -82,15 +82,9 @@ public class TransfersRouter extends RouteBuilder {
                         "'Response from BCX backend API, payment, postTransaction: ${body}', " +
                         "'Tracking the response', " +
                         "'Verify the response', null)")
-                .to("bean:customJsonMessage?method=logJsonMessage(" +
-                        "'info', " +
-                        "${header.X-CorrelationId}, " +
-                        "'ResponseCode from BCX backend API, payment, postTransaction: ${body['responseCode']}', " +
-                        "'Tracking the response', " +
-                        "'Verify the response', null)")
 //                .process(exchange -> System.out.println())
                 .choice()
-                  .when(simple("${body['responseCode']} != '00'"))
+                  .when(simple("${body['responseCode']} != '00' && ${body['responseCode']} != '09' && ${body['responseCode']} != '10'"))
                     .to("direct:catchCBSError")
                 .endDoTry()
 
