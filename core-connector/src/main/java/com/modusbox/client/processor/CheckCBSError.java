@@ -17,12 +17,12 @@ public class CheckCBSError implements Processor {
         String s = gson.toJson(exchange.getIn().getBody(), LinkedHashMap.class);
         JSONObject respObject = new JSONObject(s);
         int errorCode = 0;
-        int responseCode = 0;
+        String responseCode = "0";
         String responseMessage = "";
 
         try {
             errorCode = respObject.getInt("code");
-            responseCode = respObject.getInt("responseCode");
+            responseCode = respObject.getString("responseCode");
             responseMessage = respObject.getString("responseMessage");
 //          respObject.getString("message");
             if (errorCode == 200) {
